@@ -5,16 +5,9 @@ import Image, { type StaticImageData } from "next/image";
 import { motion } from "framer-motion";
 import { ProfileStats } from "./ProfileStats";
 
+/* Ícones */
 const UserCheck = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    width="16"
-    height="16"
-    aria-hidden="true"
-    focusable="false"
-    {...props}
-  >
+  <svg viewBox="0 0 24 24" fill="none" width="16" height="16" aria-hidden="true" {...props}>
     <path
       d="M20 6L9 17l-5-5"
       stroke="currentColor"
@@ -26,15 +19,7 @@ const UserCheck = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 const UsersIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    width="16"
-    height="16"
-    aria-hidden="true"
-    focusable="false"
-    {...props}
-  >
+  <svg viewBox="0 0 24 24" fill="none" width="16" height="16" aria-hidden="true" {...props}>
     <path
       d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
       stroke="currentColor"
@@ -42,59 +27,28 @@ const UsersIcon = (props: React.SVGProps<SVGSVGElement>) => (
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <circle
-      cx="9"
-      cy="10"
-      r="4"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+    <circle cx="9" cy="10" r="4" stroke="currentColor" strokeWidth="1.5" />
     <path
       d="M21 21v-3a5 4 0 0 0-4-3.87"
       stroke="currentColor"
       strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
     />
-    <path
-      d="M13 6.13a4 4 0 0 1 0 8.75"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+    <path d="M13 6.13a4 4 0 0 1 0 8.75" stroke="currentColor" strokeWidth="1.5" />
   </svg>
 );
 
 const MailIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    width="16"
-    height="16"
-    aria-hidden="true"
-    focusable="false"
-    {...props}
-  >
+  <svg viewBox="0 0 24 24" fill="none" width="16" height="16" aria-hidden="true" {...props}>
     <path
       d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"
       stroke="currentColor"
       strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
     />
-    <path
-      d="M22 6l-10 7L2 6"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+    <path d="M22 6l-10 7L2 6" stroke="currentColor" strokeWidth="1.5" />
   </svg>
 );
 
+/* Botão */
 type ButtonVariant = "default" | "secondary" | "following";
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
@@ -109,7 +63,7 @@ const Button = ({ variant = "default", children, className = "", ...props }: But
     following:
       "bg-green-600 text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 shadow-md cursor-pointer",
     secondary:
-      "bg-gray-200 border-none text-foreground text-black hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 shadow-md cursor-pointer",
+      "bg-gray-200 text-black hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 shadow-md cursor-pointer",
   };
 
   return (
@@ -123,6 +77,7 @@ const Button = ({ variant = "default", children, className = "", ...props }: But
   );
 };
 
+/* Card */
 interface ProfileCardProps {
   name?: string;
   role?: string;
@@ -139,8 +94,12 @@ const ProfileCard = ({
   className = "",
 }: ProfileCardProps) => {
   const [isFollowing, setIsFollowing] = useState(false);
+  const [seguindo, setSeguindo] = useState(7500); // valor inicial
 
-  const handleFollowClick = () => setIsFollowing((s) => !s);
+  const handleFollowClick = () => {
+    setIsFollowing((prev) => !prev);
+    setSeguindo((prev) => (isFollowing ? prev - 1 : prev + 1));
+  };
 
   return (
     <motion.div
@@ -153,28 +112,29 @@ const ProfileCard = ({
     >
       <div className="absolute top-0 left-0 w-full h-24 bg-gray-200 rounded-t-xl"></div>
 
+      {/* Foto */}
       <div className="flex flex-col items-center mb-4 relative mt-8">
-        <div className="relative group z-10">
-          <div className="w-28 h-28 rounded-full overflow-hidden ring-4 ring-[#8149A7] border-4 border-white transition-all duration-300 group-hover:scale-105">
-            <Image
-              src={avatarUrl}
-              alt={`Foto de perfil de ${name}`}
-              width={96}
-              height={96}
-              className="w-full h-full object-cover"
-              priority={false}
-            />
-          </div>
+        <div className="w-28 h-28 rounded-full overflow-hidden ring-4 ring-[#8149A7] border-4 border-white transition-all duration-300 hover:scale-105">
+          <Image
+            src={avatarUrl}
+            alt={`Foto de perfil de ${name}`}
+            width={96}
+            height={96}
+            className="w-full h-full object-cover"
+          />
         </div>
       </div>
 
+      {/* Nome e cargo */}
       <div className="text-center mb-4">
         <h2 className="text-2xl font-bold text-foreground mb-1">{name}</h2>
         <p className="text-sm text-gray-600">{role}</p>
       </div>
 
-      <ProfileStats />
+      {/* Estatísticas */}
+      <ProfileStats seguidores={1195} seguindo={seguindo} projetos={40} />
 
+      {/* Botões */}
       <div className="flex gap-3 mt-6">
         <Button
           onClick={handleFollowClick}
