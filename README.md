@@ -1,4 +1,4 @@
-# 💼 Card de Perfil Interativo – Componente Moderno de Perfil
+# 💼 Card de Perfil Interativo
 
 Um elegante e acessível **card de perfil animado**, desenvolvido com **Next.js**, **Tailwind CSS** e **Framer Motion**.  
 O componente exibe informações de usuário, estatísticas e botões de interação (“Seguir” e “Mensagem”) com comportamento dinâmico e responsivo.
@@ -38,16 +38,16 @@ O componente exibe informações de usuário, estatísticas e botões de intera�
 
 ## 📦 Estrutura do Projeto
 
-src/
-├── components/
-│ ├── ProfileCard.tsx # Componente principal
-│ ├── ProfileStats.tsx # Estatísticas de seguidores/seguindo/projetos
+📁 **src/**
+├── **components/**
+│   ├── `ProfileCard.tsx` → Componente principal  
+│   ├── `ProfileStats.tsx` → Estatísticas (seguidores, seguindo, projetos)  
 │
-├── public/
-│ └── jno.jpg # Imagem do perfil (exemplo)
+├── **public/**
+│   └── `jno.jpg` → Imagem de perfil (exemplo)  
 │
-└── app/
-└── page.tsx # Página principal que importa o componente
+└── **app/**
+    └── `page.tsx` → Página principal que importa o componente  
 
 🎯 Acessibilidade (ARIA + Focus States)
 Este componente foi projetado com boas práticas de acessibilidade:
